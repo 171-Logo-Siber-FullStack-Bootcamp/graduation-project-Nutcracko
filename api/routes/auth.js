@@ -16,7 +16,7 @@ router.get("/user/activate", (req, res) => {
 });
 
 //!TEMPORARY
-router.get("/users", async (req, res) => {
+router.get("/user", async (req, res) => {
   const users = await pool.query("SELECT * FROM user_account");
   res.send(users.rows);
 });

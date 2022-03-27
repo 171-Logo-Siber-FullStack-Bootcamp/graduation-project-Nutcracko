@@ -4,15 +4,19 @@ import { createRouter, createWebHistory } from "vue-router";
 //importing page components
 import HomePage from "../pages/HomePage.vue";
 import StorePage from "../pages/StorePage.vue";
+import ContactPage from "../pages/ContactPage.vue";
 import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
+import CartPage from "../pages/CartPage.vue";
 
 //defining routes
 const routes = [
   { path: "/", component: HomePage },
   { path: "/store", component: StorePage },
+  { path: "/contact", component: ContactPage },
   { path: "/login", component: LoginPage },
   { path: "/register", component: RegisterPage },
+  { path: "/cart", component: CartPage },
 ];
 
 //creating history

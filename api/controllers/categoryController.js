@@ -21,6 +21,24 @@ getAllCategories = async (req, res) => {
   }
 };
 
+//returnes all products in a category
+getAllPinCategory = async (req, res) => {
+  try {
+    const allProducts = await Category.getAllProductsinCategory(
+      req.params.categoryname
+    );
+    //returning products
+    res.json(allProducts);
+  } catch (error) {
+    logger.error(new Error(error), {
+      location: "./controller/categoryController",
+    });
+
+    //returning error
+    res.status(400).send(error);
+  }
+};
+
 getCategoryByName = async (req, res) => {
   try {
     if (!req.params.categoryname) {
@@ -89,6 +107,7 @@ deleteCategory = async (req, res) => {
 
 module.exports = {
   getAllCategories,
+  getAllPinCategory,
   getCategoryByName,
   createCategory,
   deleteCategory,

@@ -59,7 +59,13 @@ registerUser = async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, salt);
 
     //creating user
-    const user = new User(req.body.username, req.body.email, hashedPass);
+    const user = new User(
+      req.body.username,
+      req.body.email,
+      hashedPass,
+      [],
+      []
+    );
 
     //saving user to DB
     const savedUser = await user.saveUser();
@@ -113,7 +119,6 @@ loginUser = async (req, res) => {
     if (!validPass) {
       throw "Login credentials are wrong.";
     }
-
     //create jwt
     const token = jwt.sign(userFound.u_id, process.env.USER_SECRET);
 
@@ -125,7 +130,7 @@ loginUser = async (req, res) => {
       meta: "user_log-in",
     });
 
-    return res.send("Successfull Login.");
+    return res.send({ login: "success", token: token });
   } catch (error) {
     logger.error(new Error(error), { location: "./controller/authController" });
     //returning error

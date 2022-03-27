@@ -6,6 +6,12 @@
       <h1>Nut<span>E-Commerce</span></h1>
       <h1>Login</h1>
       <p>Don't you have an account?<a href="/register">Register here!</a></p>
+      <h3>Account Type:</h3>
+      <select name="acctype-dropdown" id="acctype-dropdown">
+        <option value="select">Select...</option>
+        <option value="user">User</option>
+        <option value="seller">Seller</option>
+      </select>
 
       <input type="text" name="email" id="email" placeholder="Email" />
       <input
@@ -14,7 +20,12 @@
         id="password"
         placeholder="Password"
       />
-      <input type="submit" id="login-button" value="Login" />
+      <input
+        type="submit"
+        id="login-button"
+        value="Login"
+        v-on:click="submit"
+      />
 
       <ul id="form-messages">
         <li id="generic-error">Generic Eror #1</li>
@@ -23,9 +34,66 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "LoginBox",
   components: {},
+  methods: {
+    submit: async function () {
+      if (document.getElementById("acctype-dropdown").value == "user") {
+        axios({
+          method: "POST",
+          url: "http://localhost:5050/api/auth/user/login",
+          mode: "cors",
+          data: {
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+          },
+        })
+          .then((data) => {
+            document.cookie = `auth=${data.data.token}`;
+            localStorage.setItem("auth", data.data.token);
+            window.location.replace("http://localhost:8080/");
+          })
+          .catch((err) => {
+            console.log(err);
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `Error: Login credentials are wrong!`;
+            document.getElementById("form-messages").style["display"] = "block";
+          });
+      } else if (
+        document.getElementById("acctype-dropdown").value == "seller"
+      ) {
+        axios({
+          method: "POST",
+          url: "http://localhost:5050/api/auth/seller/login",
+          mode: "cors",
+          data: {
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+          },
+        })
+          .then((data) => {
+            document.cookie = `sellerauth=${data.data.token}`;
+            localStorage.setItem("sellerauth", data.data.token);
+            window.location.replace("http://localhost:8080/");
+          })
+          .catch((err) => {
+            console.log(err);
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `Error: Login credentials are wrong!`;
+            document.getElementById("form-messages").style["display"] = "block";
+          });
+      } else {
+        document.getElementById(
+          "generic-error"
+        ).innerHTML = `Error: Please Select Account-Type`;
+        document.getElementById("form-messages").style["display"] = "block";
+      }
+    },
+  },
 };
 </script>
 <style>
@@ -114,5 +182,22 @@ export default {
 }
 #form-messages li {
   list-style-type: none;
+}
+.box select {
+  border: 0;
+  background: transparent;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid var(--secondary);
+  padding: 14px 10px;
+  width: 100px;
+  outline: none;
+  color: var(--primary);
+  border-radius: 5px;
+  transition: 0.25s;
+}
+.box option {
+  font-size: 1.5em;
 }
 </style>

@@ -1,20 +1,20 @@
 <template>
   <div class="container">
-    <TopBarComponent page="login" />
-    <LoginBoxComponent />
+    <TopBarComponent page="cart" />
+    <UserCartComponent />
   </div>
 </template>
 <script>
 import TopBarComponent from "@/components/HomePageComponents/TopBarComponent.vue";
-import LoginBoxComponent from "@/components/LoginPageComponents/LoginBoxComponent.vue";
+import UserCartComponent from "@/components/CartPageComponents/UserCartComponent.vue";
 
 export default {
-  name: "LoginPage",
-  components: { TopBarComponent, LoginBoxComponent },
+  name: "CartPage",
+  components: { TopBarComponent, UserCartComponent },
   mounted() {
     //TODO:these statements should be changed with if document.cookie.splice("=")!=auth and so on
-    if (document.cookie) {
-      window.location.href = "http://localhost:8080/";
+    if (!document.cookie) {
+      window.location.href = "http://localhost:8080/login";
     }
   },
 };

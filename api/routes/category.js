@@ -13,6 +13,11 @@ router.get("/:categoryname", (req, res) => {
   categoryController.getCategoryByName(req, res);
 });
 
+//get all products in a category
+router.get("/getproducts/:categoryname", (req, res) => {
+  categoryController.getAllPinCategory(req, res);
+});
+
 //SETTERS
 //product create and update done by the owner of the product
 router.post("/", (req, res) => {

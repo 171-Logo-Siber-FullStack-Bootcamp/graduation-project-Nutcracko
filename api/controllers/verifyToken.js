@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 userVerify = function (req, res, next) {
-  const token = req.cookies.auth;
+  const token = req.cookies.auth || req.headers.auth;
   if (!token) return res.status(401).send("Please Login to proceed further.");
   try {
     const userid = jwt.verify(token, process.env.USER_SECRET);
-    req.userid = userid._id;
+    req.userid = userid;
     req.isLoggedin = true;
     next();
   } catch (err) {
@@ -14,11 +14,11 @@ userVerify = function (req, res, next) {
 };
 
 sellerVerify = function (req, res, next) {
-  const token = req.cookies.sellerauth;
+  const token = req.cookies.sellerauth || req.headers.sellerauth;
   if (!token) return res.status(401).send("Please Login to proceed further.");
   try {
     const sellerid = jwt.verify(token, process.env.SELLER_SECRET);
-    req.sellerid = sellerid._id;
+    req.sellerid = sellerid;
     req.isLoggedin = true;
     next();
   } catch (err) {

@@ -37,7 +37,6 @@ export default {
       .then((response) => response.json())
       .then((data) => (this.categories = data))
       .catch((err) => console.log("ERROR:" + err.message));
-    console.log(this.categories);
   },
   data() {
     return {

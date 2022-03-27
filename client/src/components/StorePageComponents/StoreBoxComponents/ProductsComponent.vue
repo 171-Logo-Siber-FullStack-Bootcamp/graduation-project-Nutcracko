@@ -4,11 +4,23 @@
       <img v-bind:src="product.image" v-bind:alt="product.name" />
       <h3>{{ product.name }}</h3>
       <hr />
-      <p>{{ product.description }}</p>
+      <p>{{ product.seller }}</p>
+      <h2>
+        {{ product.price }} ₺
+        <button
+          v-if="product.stockexists"
+          v-on:click="addcomponenttocart(product.p_id)"
+        >
+          + <i class="fas fa-shopping-cart"></i>
+        </button>
+        <h2 v-else-if="!product.stockexists">Out of Stock</h2>
+      </h2>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "ProductsComponent",
   components: {},
@@ -24,12 +36,29 @@ export default {
       products: [],
     };
   },
+  methods: {
+    addcomponenttocart: function (productid) {
+      if (!localStorage.getItem("auth")) {
+        window.location.href = "http://localhost:8080/login";
+      } else {
+        axios({
+          method: "POST",
+          mode: "cors",
+          url: "http://localhost:5050/api/user/addtocart/" + productid,
+          headers: { auth: localStorage.getItem("auth") },
+        })
+          .then(alert("Product has been added to cart successfully!"))
+          .catch((err) => console.log(err));
+      }
+    },
+  },
 };
 </script>
 <style>
 .products-container {
   flex: 1;
   display: flex;
+  flex-flow: wrap;
   align-items: center;
   justify-content: left;
   margin-left: 5px;
@@ -43,6 +72,17 @@ export default {
   font-family: "Roboto", cursive;
   margin: 4px;
 }
+.product button {
+  margin: 0;
+  font-size: 20px;
+  padding: 8px 4px;
+  background-color: var(--third);
+  border: 1px solid var(--primary);
+  border-radius: 3px;
+}
+.product button:hover {
+  background-color: green;
+}
 .product h3 {
   margin: 0;
   margin-top: 2px;
@@ -52,10 +92,13 @@ export default {
   margin-top: 2px;
 }
 .product:hover {
-  border: 3px solid var(--third);
+  border-color: var(--third);
 }
 .product img {
   width: 150px;
   height: 150px;
+}
+.pricediv {
+  display: contents;
 }
 </style>

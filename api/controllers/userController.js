@@ -4,25 +4,28 @@ const logger = require("../config/dev-logger");
 //User model
 const User = require("../models/User");
 
-getUserCart = (req, res) => {
+getUserCart = async (req, res) => {
   try {
     //finding user from userid taken from token
-    const user = User.getUserByID(req.userid);
+    const cart = await User.getUserCart(req.userid);
     //returning user cart
-    res.send(user.rows[0].cart);
+    res.send(cart);
   } catch (error) {
     logger.error(new Error(error), {
       location: "./controller/userController",
     });
     //returning error
-    res.status(401).send("Product could not be added to cart.");
+    res.status(401).send("Error during getting user cart.");
   }
 };
 
-addProducttoCart = (req, res) => {
+addProducttoCart = async (req, res) => {
   try {
     //userid taken from token and productid delivered by request body
-    const updatedUser = User.addPtoUserCart(req.userid, req.params.productid);
+    const updatedUser = await User.addPtoUserCart(
+      req.userid,
+      req.params.productid
+    );
 
     //returning updatedUser
     res.send(updatedUser);
@@ -57,4 +60,4 @@ userProfile = (req, res) => {
   }
 };
 
-module.exports = { addProducttoCart, userProfile };
+module.exports = { getUserCart, addProducttoCart, userProfile };

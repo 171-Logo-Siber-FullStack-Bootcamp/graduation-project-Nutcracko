@@ -1,6 +1,5 @@
 //DB connection
 const pool = require("../config/db");
-const Product = require("./Product");
 
 class Category {
   constructor(name, products) {
@@ -31,7 +30,6 @@ class Category {
   };
 
   static getAllProductsinCategory = async (categoryname) => {
-    var products = [];
     const category = await pool.query(
       "SELECT * FROM category WHERE name = $1",
       [categoryname]
@@ -41,24 +39,12 @@ class Category {
       throw "Category does not exists!";
     }
 
-    //!change here
-    //TODO: search through products with category: categoryname
+    const products = await pool.query(
+      "SELECT * FROM product WHERE category=$1",
+      [categoryname]
+    );
 
-    //returning error if no products exist in the category
-    if (category.rows[0].products.length == 0) {
-      throw "No products exists in the category";
-    } else {
-      //finding and adding each product to products array
-      category.rows[0].products.forEach(async (element) => {
-        var product = await pool.query(
-          "SELECT * FROM products WHERE category = $1",
-          [categoryname]
-        );
-        products.push(element);
-      });
-    }
-
-    return products;
+    return products.rows;
   };
 
   static addPtoCategoryProducts = async (categoryname, productid) => {
