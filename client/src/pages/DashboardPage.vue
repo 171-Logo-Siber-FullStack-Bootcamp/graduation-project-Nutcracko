@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <TopBarComponent page="cart" />
-    <UserCartComponent />
+    <TopBarComponent page="dashboard" />
+    <DashboardComponent />
   </div>
 </template>
 <script>
 import TopBarComponent from "@/components/HomePageComponents/TopBarComponent.vue";
-import UserCartComponent from "@/components/CartPageComponents/UserCartComponent.vue";
+import DashboardComponent from "@/components/DashboardPageComponents/DashboardComponent.vue";
 
 export default {
-  name: "CartPage",
-  components: { TopBarComponent, UserCartComponent },
+  name: "DashboardPage",
+  components: { TopBarComponent, DashboardComponent },
   mounted() {
-    if (!localStorage.getItem("auth")) {
+    if (!localStorage.getItem("sellerauth")) {
       window.location.href = "http://localhost:8080/login";
     }
   },

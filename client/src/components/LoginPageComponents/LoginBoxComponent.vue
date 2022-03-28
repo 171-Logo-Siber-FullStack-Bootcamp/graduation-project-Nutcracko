@@ -40,6 +40,7 @@ export default {
   components: {},
   methods: {
     submit: async function () {
+      //if user
       if (document.getElementById("acctype-dropdown").value == "user") {
         axios({
           method: "POST",
@@ -59,7 +60,7 @@ export default {
             console.log(err);
             document.getElementById(
               "generic-error"
-            ).innerHTML = `Error: Login credentials are wrong!`;
+            ).innerHTML = `Error: ${err.response.data}`;
             document.getElementById("form-messages").style["display"] = "block";
           });
       } else if (
@@ -75,15 +76,15 @@ export default {
           },
         })
           .then((data) => {
-            document.cookie = `sellerauth=${data.data.token}`;
-            localStorage.setItem("sellerauth", data.data.token);
+            document.cookie = `sellerauth=${data.data.sellertoken}`;
+            localStorage.setItem("sellerauth", data.data.sellertoken);
             window.location.replace("http://localhost:8080/");
           })
           .catch((err) => {
             console.log(err);
             document.getElementById(
               "generic-error"
-            ).innerHTML = `Error: Login credentials are wrong!`;
+            ).innerHTML = `Error: ${err.response.data}`;
             document.getElementById("form-messages").style["display"] = "block";
           });
       } else {

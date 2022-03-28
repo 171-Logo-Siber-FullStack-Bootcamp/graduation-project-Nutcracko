@@ -101,7 +101,7 @@ class Seller {
     //Inserting new user
     const newSeller = await pool.query(
       "INSERT INTO seller_account (username, email, password, owned_products, date) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-      [this.username, this.email, this.password, this.ownedproducts, newDate]
+      [this.username, this.email, this.password, this.owned_products, newDate]
     );
 
     return newSeller.rows[0];

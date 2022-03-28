@@ -38,6 +38,23 @@ addProducttoCart = async (req, res) => {
   }
 };
 
+//clear all items from user cart
+clearUserCart = async (req, res) => {
+  try {
+    //userid taken from token
+    const updatedUser = await User.clearCart(req.userid);
+
+    //returning updatedUser
+    res.send(updatedUser);
+  } catch (error) {
+    logger.error(new Error(error), {
+      location: "./controller/userController",
+    });
+    //returning error
+    res.status(401).send("User cart could not be cleared.");
+  }
+};
+
 userProfile = (req, res) => {
   try {
     //getting userid from request
@@ -60,4 +77,4 @@ userProfile = (req, res) => {
   }
 };
 
-module.exports = { getUserCart, addProducttoCart, userProfile };
+module.exports = { getUserCart, addProducttoCart, clearUserCart, userProfile };

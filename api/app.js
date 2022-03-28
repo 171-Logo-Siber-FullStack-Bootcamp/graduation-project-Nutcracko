@@ -28,6 +28,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const categoryRoute = require("./routes/category");
+const searchRoute = require("./routes/search");
 
 //middleware
 app.use("/static", express.static("public")); //serving static files
@@ -41,6 +42,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);
+app.use("/api/search", searchRoute);
 
 //application port configuration
 const port = process.env.PORT || 3030;

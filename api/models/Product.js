@@ -19,6 +19,30 @@ class Product {
 
     return allProducts.rows;
   };
+  //returning product owned by seller
+  static getSellerProducts = async (sellerid) => {
+    //finding seller
+    const seller = await pool.query(
+      "SELECT * FROM seller_account WHERE s_id=$1",
+      [sellerid]
+    );
+
+    if (seller.rowCount == 0) {
+      throw "Seller does not exists!";
+    }
+
+    //getting seller products
+    const allProducts = await pool.query(
+      "SELECT * FROM product WHERE seller=$1",
+      [seller.rows[0].username]
+    );
+
+    if (allProducts.rowCount == 0) {
+      throw "No Products have been found.";
+    }
+
+    return allProducts.rows;
+  };
 
   static getProductByID = async (productid) => {
     const product = await pool.query("SELECT * FROM product WHERE p_id = $1", [
@@ -41,6 +65,39 @@ class Product {
     );
 
     return productObj;
+  };
+
+  //changes product stock option
+  static changeStock = async (sellerid, productid) => {
+    const product = await pool.query("SELECT * FROM product WHERE p_id = $1", [
+      productid,
+    ]);
+
+    if (product.rowCount == 0) {
+      throw "Product does not exists!";
+    }
+    const productReturned = product.rows[0];
+
+    //check if seller owns the product
+    const seller = await pool.query(
+      "SELECT * FROM seller_account WHERE s_id = $1",
+      [sellerid]
+    );
+
+    //throw error if seller does not owns product
+    if (productReturned.seller != seller.rows[0].username) {
+      throw "Seller does not owns the product.";
+    }
+    //change stock
+    const stock = !productReturned.stockexists;
+
+    //update product
+    const updatedProduct = await pool.query(
+      "UPDATE product SET stockexists=$1 WHERE p_id=$2 RETURNING *",
+      [stock, productid]
+    );
+
+    return updatedProduct.rows[0];
   };
 
   static deleteProductByID = async (productid) => {

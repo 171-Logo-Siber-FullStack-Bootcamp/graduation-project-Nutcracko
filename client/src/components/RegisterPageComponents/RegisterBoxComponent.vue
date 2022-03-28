@@ -21,10 +21,15 @@
       <input
         type="password"
         name="password"
-        id="password"
+        id="repeatpassword"
         placeholder="Repeat-password"
       />
-      <input type="submit" id="register-button" value="Register" />
+      <input
+        type="submit"
+        id="register-button"
+        value="Register"
+        v-on:click="register"
+      />
 
       <ul id="form-messages">
         <li id="generic-error">Generic Eror #1</li>
@@ -35,9 +40,107 @@
 
 <script>
 import LogoComponent from "../HomePageComponents/TopBarComponents/LogoComponent.vue";
+
+import axios from "axios";
+
 export default {
   name: "RegisterBox",
   components: { LogoComponent },
+  methods: {
+    register: async function () {
+      //check if repeat password matches
+      if (
+        document.getElementById("password").value !=
+        document.getElementById("repeatpassword").value
+      ) {
+        document.getElementById(
+          "generic-error"
+        ).innerHTML = `Passwords do not match.`;
+        document.getElementById("form-messages").style["display"] = "block";
+        document.getElementById("form-messages").style["border"] =
+          "2px solid red";
+        document.getElementById("form-messages").style["background-color"] =
+          "rgb(255, 232, 232)";
+        return;
+      }
+      //
+      const data = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+      };
+      if (document.getElementById("acc-dropdown").value == "user") {
+        axios({
+          method: "POST",
+          url: "http://localhost:5050/api/auth/user/register",
+          mode: "cors",
+          data: data,
+        })
+          .then((response) => {
+            console.log(response);
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `User has been created successfully!`;
+            document.getElementById("form-messages").style["display"] = "block";
+            document.getElementById("form-messages").style["border"] =
+              "2px solid var(--third)";
+            document.getElementById("form-messages").style["background-color"] =
+              "var(--third)";
+            document.getElementById("form-messages").style["background-color"] =
+              "#68d986";
+          })
+          .catch((err) => {
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `Error: ${err.response.data}`;
+            document.getElementById("form-messages").style["display"] = "block";
+            document.getElementById("form-messages").style["border"] =
+              "2px solid red";
+            document.getElementById("form-messages").style["background-color"] =
+              "rgb(255, 232, 232)";
+          });
+      } else if (document.getElementById("acc-dropdown").value == "seller") {
+        axios({
+          method: "POST",
+          url: "http://localhost:5050/api/auth/seller/register",
+          mode: "cors",
+          data: data,
+        })
+          .then((response) => {
+            console.log(response);
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `Seller has been created successfully!`;
+            document.getElementById("form-messages").style["display"] = "block";
+            document.getElementById("form-messages").style["border"] =
+              "2px solid var(--third)";
+            document.getElementById("form-messages").style["background-color"] =
+              "var(--third)";
+            document.getElementById("form-messages").style["background-color"] =
+              "#68d986";
+          })
+          .catch((err) => {
+            document.getElementById(
+              "generic-error"
+            ).innerHTML = `Error: ${err.response.data}`;
+            document.getElementById("form-messages").style["display"] = "block";
+            document.getElementById("form-messages").style["border"] =
+              "2px solid red";
+            document.getElementById("form-messages").style["background-color"] =
+              "rgb(255, 232, 232)";
+          });
+      } else {
+        document.getElementById(
+          "generic-error"
+        ).innerHTML = `Please Select Account-Type.`;
+        document.getElementById("form-messages").style["display"] = "block";
+        document.getElementById("form-messages").style["border"] =
+          "2px solid red";
+        document.getElementById("form-messages").style["background-color"] =
+          "rgb(255, 232, 232)";
+      }
+    },
+  },
 };
 </script>
 <style>
@@ -46,6 +149,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .registerbox {
@@ -109,7 +213,7 @@ export default {
 #form-messages {
   background-color: rgb(255, 232, 232);
   border: 2px solid red;
-  color: red;
+  color: black;
   border-radius: 20px;
   display: none;
   font-size: 13px;

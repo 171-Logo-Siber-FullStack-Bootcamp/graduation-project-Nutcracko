@@ -4,12 +4,17 @@
       <li class="home"><a href="/">Home</a></li>
       <li class="store"><a href="/store">Store</a></li>
       <li class="contact"><a href="/contact">Contact</a></li>
-      <li v-if="!cookie" class="sign-in"><a href="/login">Sign In</a></li>
-      <li v-else-if="cookie" class="cart">
+      <li v-if="!token && !sellertoken" class="sign-in">
+        <a href="/login">Sign In</a>
+      </li>
+      <li v-else-if="token" class="cart">
         <a href="/cart"><i class="fas fa-shopping-cart"></i>Cart</a>
       </li>
+      <li v-else-if="sellertoken" class="dashboard">
+        <a href="/dashboard">Dashboard</a>
+      </li>
       <li
-        v-if="cookie"
+        v-if="token || sellertoken"
         class="sign-in"
         v-on:click="logout"
         style="border-color: red"
@@ -25,7 +30,8 @@ export default {
   components: {},
   data() {
     return {
-      cookie: document.cookie,
+      token: localStorage.getItem("auth"),
+      sellertoken: localStorage.getItem("sellerauth"),
     };
   },
   methods: {
@@ -47,16 +53,19 @@ export default {
   display: flex;
   list-style-type: none;
 }
+.navbar-container li {
+  margin-right: 30px;
+}
 .navbar-container a {
   text-decoration: none;
   color: var(--primary);
   font-size: 30px;
-  margin-right: 40px;
+  margin: 0;
   font-family: "Lobster", cursive;
 }
 .sign-in {
   justify-content: center;
-  margin: 0;
+  padding: 2px;
   border-radius: 10px;
   border: 3px solid var(--third);
   font-size: 20px;

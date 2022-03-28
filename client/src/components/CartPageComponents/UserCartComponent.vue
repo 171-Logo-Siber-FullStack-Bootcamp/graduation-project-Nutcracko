@@ -65,7 +65,20 @@ export default {
       alert("Check-out is not possible yet.");
     },
     clearcart: function () {
-      alert("Clear cart presssed.");
+      axios({
+        method: "DELETE",
+        url: "http://localhost:5050/api/user/cart",
+        mode: "cors",
+        headers: { auth: localStorage.getItem("auth") },
+      })
+        .then((data) => {
+          console.log(data);
+          window.location.replace("http://localhost:8080/cart");
+        })
+        .catch((err) => {
+          console.log(err.response.data);
+          alert(`Something went wrong: ${err.response.data}`);
+        });
     },
   },
 };

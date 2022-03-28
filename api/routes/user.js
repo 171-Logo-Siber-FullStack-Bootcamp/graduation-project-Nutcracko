@@ -17,6 +17,11 @@ router.post("/addtocart/:productid", userVerify, (req, res) => {
   userController.addProducttoCart(req, res);
 });
 
+//clears user cart
+router.delete("/cart", userVerify, (req, res) => {
+  userController.clearUserCart(req, res);
+});
+
 //returns user profile
 router.get("/profile", userVerify, (req, res) => {
   userController.userProfile(req, res);

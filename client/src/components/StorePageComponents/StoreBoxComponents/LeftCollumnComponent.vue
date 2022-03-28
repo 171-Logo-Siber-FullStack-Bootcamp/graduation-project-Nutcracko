@@ -18,7 +18,7 @@
         <option
           v-for="category in categories"
           :key="category.name"
-          value="{{category.name}}"
+          v-bind:value="category.name"
         >
           {{ category.name }}
         </option>

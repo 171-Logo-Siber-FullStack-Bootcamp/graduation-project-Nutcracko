@@ -24,6 +24,21 @@ getAllProducts = async (req, res) => {
   }
 };
 
+//returns products of the seller
+getSellerProducts = async (req, res) => {
+  try {
+    const allProducts = await Product.getSellerProducts(req.sellerid);
+    //returning productss
+    res.json(allProducts);
+  } catch (error) {
+    logger.error(new Error(error), {
+      location: "./controller/productController",
+    });
+    //returning error
+    res.status(400).send(error);
+  }
+};
+
 getProductbyID = async (req, res) => {
   try {
     if (!req.params.productid) {
@@ -112,6 +127,26 @@ createProduct = async (req, res) => {
   }
 };
 
+//changes Product stock option
+changeStock = async (req, res) => {
+  try {
+    const product = await Product.changeStock(
+      req.sellerid,
+      req.params.productid
+    );
+    logger.info(
+      `Product stock option changed.\n  p_id: ${product.p_id}\n  name: ${product.name}`
+    );
+    return res.send(product);
+  } catch (error) {
+    logger.error(new Error(error), {
+      location: "./controller/productController",
+    });
+    //returning error
+    return res.status(400).send(error);
+  }
+};
+//deletes product by id
 deleteProduct = async (req, res) => {
   try {
     const deletedProduct = await Product.deleteProductByID(
@@ -153,8 +188,10 @@ updateProductbyID = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  getSellerProducts,
   getProductbyID,
   createProduct,
+  changeStock,
   deleteProduct,
   updateProductbyID,
 };

@@ -251,7 +251,7 @@ loginSeller = async (req, res) => {
       meta: "seller_log-in",
     });
 
-    return res.send("Successfull Login.");
+    return res.send({ login: "success", sellertoken: token });
   } catch (error) {
     logger.error(new Error(error), { location: "./controller/authController" });
     //returning error

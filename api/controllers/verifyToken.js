@@ -18,7 +18,7 @@ sellerVerify = function (req, res, next) {
   if (!token) return res.status(401).send("Please Login to proceed further.");
   try {
     const sellerid = jwt.verify(token, process.env.SELLER_SECRET);
-    req.sellerid = sellerid;
+    req.sellerid = sellerid._id;
     req.isLoggedin = true;
     next();
   } catch (err) {

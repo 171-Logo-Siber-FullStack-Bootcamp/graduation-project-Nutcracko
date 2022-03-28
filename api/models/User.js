@@ -126,8 +126,24 @@ class User {
       user.noi_incart[index]++;
     }
 
-    const updatedUser = user.updateUser(userid);
+    const updatedUser = await user.updateUser(userid);
 
+    return updatedUser;
+  };
+
+  //clears user cart
+  static clearCart = async (userid) => {
+    //finding user by userid
+    var user = await User.getUserByID(userid);
+
+    //clear cart
+    user.cart = [];
+    user.noi_incart = [];
+
+    //update user
+    const updatedUser = await user.updateUser(userid);
+
+    //return user
     return updatedUser;
   };
 

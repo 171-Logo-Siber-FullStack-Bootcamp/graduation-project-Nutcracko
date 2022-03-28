@@ -12,8 +12,7 @@ export default {
   name: "LoginPage",
   components: { TopBarComponent, LoginBoxComponent },
   mounted() {
-    //TODO:these statements should be changed with if document.cookie.splice("=")!=auth and so on
-    if (document.cookie) {
+    if (localStorage.getItem("auth") || localStorage.getItem("sellerauth")) {
       window.location.href = "http://localhost:8080/";
     }
   },

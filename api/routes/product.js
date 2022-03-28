@@ -15,8 +15,12 @@ router.get("/", (req, res) => {
   productController.getAllProducts(req, res);
 });
 
-router.get("/:productid", (req, res) => {
+router.get("/byid/:productid", (req, res) => {
   productController.getProductbyID(req, res);
+});
+
+router.get("/seller", sellerVerify, (req, res) => {
+  productController.getSellerProducts(req, res);
 });
 
 //SETTERS
@@ -29,8 +33,8 @@ router.put("/:productid", sellerVerify, (req, res) => {
   productController.updateProductbyID(req, res);
 });
 
-router.put("/changestock", sellerVerify, (req, res) => {
-  adminController.changeStock(req, res);
+router.put("/changestock/:productid", sellerVerify, (req, res) => {
+  productController.changeStock(req, res);
 });
 
 router.delete("/:productid", sellerVerify, (req, res) => {
