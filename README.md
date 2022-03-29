@@ -118,3 +118,7 @@ npm run serve
 ## Filter Shoes Category:
 
 ![alt text](./screenshots/FilterShoes.JPG "Filter Shoes Category")
+
+## Video of the App Running:
+
+![alt text](./video/Project%20Running%20Video.mkv "Project Video")
