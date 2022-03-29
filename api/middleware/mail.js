@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 
 sendVerification = async (userDB) => {
   const verificationToken = jwt.sign(
-    { _id: userDB._id },
+    { _id: userDB.u_id },
     process.env.EMAIL_VERIFY_TOKEN
   );
 
-  let link = `http://localhost:3030/api/auth/activation?actkey=${verificationToken}`;
+  let link = `http://localhost:5050/api/auth/activation?actkey=${verificationToken}`;
 
   //send a verification mail
   const transporter = nodemailer.createTransport({
