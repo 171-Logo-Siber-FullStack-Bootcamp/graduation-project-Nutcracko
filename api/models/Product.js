@@ -1,4 +1,8 @@
+//DB connection
 const pool = require("../config/db");
+
+//elasticcontroller
+const elasticController = require("../controllers/elasticController");
 
 class Product {
   constructor(name, description, category, image, price, seller) {
@@ -146,6 +150,8 @@ class Product {
         newDate,
       ]
     );
+
+    await elasticController.elasticPost(newProduct.rows[0]);
 
     return newProduct.rows[0];
   };

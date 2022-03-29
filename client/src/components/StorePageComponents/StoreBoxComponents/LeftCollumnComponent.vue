@@ -7,7 +7,7 @@
         type="text"
         placeholder="Search.."
       />
-      <button class="srch" id="search-button">
+      <button class="srch" id="search-button" v-on:click="search">
         <i class="fas fa-search"></i>
       </button>
     </div>
@@ -23,7 +23,12 @@
           {{ category.name }}
         </option>
       </select>
-      <input type="submit" id="filter-button" value="Filter" />
+      <input
+        type="submit"
+        id="filter-button"
+        value="Filter"
+        v-on:click="filter"
+      />
     </div>
   </div>
 </template>
@@ -42,6 +47,28 @@ export default {
     return {
       categories: [],
     };
+  },
+  methods: {
+    search: function () {
+      if (document.getElementById("search-bar").value != "") {
+        window.location.replace(
+          "http://localhost:8080/search?term=" +
+            document.getElementById("search-bar").value
+        );
+      } else {
+        window.location.replace("http://localhost:8080/store");
+      }
+    },
+    filter: function () {
+      if (document.getElementById("filter-dropdown").value != "select") {
+        window.location.replace(
+          "http://localhost:8080/filter?category=" +
+            document.getElementById("filter-dropdown").value
+        );
+      } else {
+        alert("Please Select a filter to filter elements.");
+      }
+    },
   },
 };
 </script>

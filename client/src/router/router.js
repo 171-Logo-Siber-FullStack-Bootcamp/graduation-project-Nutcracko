@@ -9,6 +9,8 @@ import LoginPage from "../pages/LoginPage.vue";
 import RegisterPage from "../pages/RegisterPage.vue";
 import CartPage from "../pages/CartPage.vue";
 import DashboardPage from "../pages/DashboardPage.vue";
+import SearchPage from "../pages/SearchPage.vue";
+import FilterPage from "../pages/FilterPage.vue";
 
 //defining routes
 const routes = [
@@ -19,6 +21,8 @@ const routes = [
   { path: "/register", component: RegisterPage },
   { path: "/cart", component: CartPage },
   { path: "/dashboard", component: DashboardPage },
+  { path: "/search", component: SearchPage },
+  { path: "/filter", component: FilterPage },
 ];
 
 //creating history
