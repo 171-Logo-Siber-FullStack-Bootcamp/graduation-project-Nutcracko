@@ -121,4 +121,5 @@ npm run serve
 
 ## Video of the App Running:
 
-![alt text](./video/Project%20Running%20Video.mkv "Project Video")
+!Couldn't upload video since it is bigger than 10MB.
+Can see the video in ./video/ProjectRunningVideo.mp4
