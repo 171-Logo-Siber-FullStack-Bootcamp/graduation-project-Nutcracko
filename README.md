@@ -8,12 +8,15 @@ Axios, fontawesome, google fonts
 Backend Tools:
 Express, ElasticSearch, pg, jsonwebtoken, multer, winston, bcrypt, cookie-parser, cors, dotenv, joi
 
-///////////////////////////////
-DB Schema:
-![alt text](screenshots/DB-schema.jpg "DB Schema")
+## DB Schema:
 
-///////////////////////////////
-BACKEND Folder Structure(./api/)
+---
+
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+
+## BACKEND Folder Structure(./api/)
+
+---
 
 -config: configuration scripts for the application such as elasticsearch and db connection configurations and logger configs
 
@@ -30,8 +33,10 @@ controllers since mail account is needed.
 
 -validators: Validators created by joi library to validate the incoming requests for authentication processes and product creation process.
 
-///////////////////////////////
-FRONTEND Folder Structure(./client/)
+## FRONTEND Folder Structure(./client/)
+
+---
+
 inside src folder
 
 -assets: Holds the assets for the frontend. Only logo exists by the time.
@@ -42,8 +47,7 @@ inside src folder
 
 -router: Assigning which components should be rendered on which endpoint.
 
-///////////////////////////////
-How to run the app;
+## How to run the app;
 
 ---
 
@@ -63,18 +67,17 @@ npm install
 npm run serve
 ```
 
-///////////////////////////////
-Screenshots of the app:
+## Screenshots of the app:
 
 ---
 
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
-![alt text](screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.jpg "DB Schema")
