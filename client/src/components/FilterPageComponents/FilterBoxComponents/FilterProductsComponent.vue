@@ -37,6 +37,7 @@ export default {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     // GET request using fetch with error handling
+    //gets filtered products
     fetch("http://localhost:5050/api/search/filter/" + params.category)
       .then((response) => response.json())
       .then((data) => {
@@ -51,6 +52,7 @@ export default {
   },
   methods: {
     addcomponenttocart: function (productid) {
+      //when add product to cart is clicked on any product
       if (!localStorage.getItem("auth")) {
         window.location.href = "http://localhost:8080/login";
       } else {

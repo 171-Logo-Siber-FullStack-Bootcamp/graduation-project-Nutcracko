@@ -4,6 +4,7 @@ const pool = require("../config/db");
 //elasticcontroller
 const elasticController = require("../controllers/elasticController");
 
+//Product model and DAL
 class Product {
   constructor(name, description, category, image, price, seller) {
     this.name = name;
@@ -14,6 +15,7 @@ class Product {
     this.seller = seller;
   }
 
+  //returns all products
   static getAllProducts = async () => {
     const allProducts = await pool.query("SELECT * FROM product");
 
@@ -23,6 +25,7 @@ class Product {
 
     return allProducts.rows;
   };
+
   //returning product owned by seller
   static getSellerProducts = async (sellerid) => {
     //finding seller
@@ -48,6 +51,7 @@ class Product {
     return allProducts.rows;
   };
 
+  //returns product object by id
   static getProductByID = async (productid) => {
     const product = await pool.query("SELECT * FROM product WHERE p_id = $1", [
       productid,
@@ -104,9 +108,10 @@ class Product {
     return updatedProduct.rows[0];
   };
 
+  //deletes product by id
   static deleteProductByID = async (productid) => {
     const deletedProduct = await pool.query(
-      "DELETE * FROM product WHERE p_id = $1",
+      "DELETE FROM product WHERE p_id = $1",
       [productid]
     );
 
@@ -117,6 +122,7 @@ class Product {
     return deletedProduct;
   };
 
+  //updates product with given id
   updateProductByID = async (productid) => {
     //updating the product
     const updatedProduct = await pool.query(
@@ -133,6 +139,7 @@ class Product {
     );
   };
 
+  //saves product to DB
   saveProduct = async () => {
     //Creating current date
     var newDate = new Date().toISOString().slice(0, 25).toString();
@@ -151,6 +158,7 @@ class Product {
       ]
     );
 
+    //indexes product in ES
     await elasticController.elasticPost(newProduct.rows[0]);
 
     return newProduct.rows[0];

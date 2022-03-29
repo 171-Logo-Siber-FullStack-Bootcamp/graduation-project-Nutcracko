@@ -75,7 +75,7 @@ registerUser = async (req, res) => {
       meta: "user_register",
     });
 
-    //TODO: Send account verification mail
+    //TODO: Send account verification mail here
     // const error = mailer(savedUser);
 
     //send response
@@ -108,7 +108,7 @@ loginUser = async (req, res) => {
       throw "Login credentials are wrong.";
     }
 
-    //TODO: Account must be verified here
+    //TODO: Account must be verified check here
 
     //compare password
     const validPass = await bcrypt.compare(
@@ -119,6 +119,7 @@ loginUser = async (req, res) => {
     if (!validPass) {
       throw "Login credentials are wrong.";
     }
+
     //create jwt
     const token = jwt.sign(userFound.u_id, process.env.USER_SECRET);
 
@@ -130,6 +131,7 @@ loginUser = async (req, res) => {
       meta: "user_log-in",
     });
 
+    //sending login status and token in res.body
     return res.send({ login: "success", token: token });
   } catch (error) {
     logger.error(new Error(error), { location: "./controller/authController" });
@@ -138,6 +140,7 @@ loginUser = async (req, res) => {
   }
 };
 
+//user verification controller from mail link
 activateUser = (req, res) => {};
 
 //! SELLER AUTHS
@@ -184,13 +187,13 @@ registerSeller = async (req, res) => {
       []
     );
 
-    //saving admin to DB
+    //saving seller to DB
     const savedSeller = await seller.saveSeller();
 
     //TODO: Send account verification mail
     // const error = mailer(savedUser);
 
-    //logging saved admin
+    //logging saved seller
     logger.info(`A new Seller created in DB: \n ${savedSeller}`, {
       meta: "seller_register",
     });
@@ -246,11 +249,12 @@ loginSeller = async (req, res) => {
     //sign it to cookie
     res.cookie("sellerauth", token, { maxAge: 1000 * 60 * 60 * 5 });
 
-    //logging logged in user
+    //logging logged in seller
     logger.info(`A Seller just logged in: \n ${sellerFound.username}`, {
       meta: "seller_log-in",
     });
 
+    //sending login status and token
     return res.send({ login: "success", sellertoken: token });
   } catch (error) {
     logger.error(new Error(error), { location: "./controller/authController" });
@@ -259,6 +263,7 @@ loginSeller = async (req, res) => {
   }
 };
 
+//controller for seller verification
 activateSeller = (req, res) => {};
 
 module.exports = {

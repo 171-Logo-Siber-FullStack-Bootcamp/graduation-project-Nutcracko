@@ -2,6 +2,8 @@
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 
+//! Not being used right now
+//sends verification mail to user on register
 sendVerification = async (userDB) => {
   const verificationToken = jwt.sign(
     { _id: userDB.u_id },

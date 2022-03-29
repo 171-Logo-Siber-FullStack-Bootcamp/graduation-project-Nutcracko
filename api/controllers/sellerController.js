@@ -3,8 +3,9 @@
 const logger = require("../config/dev-logger");
 
 //model
-const Admin = require("../models/Admin");
+const Seller = require("../models/Seller");
 
+//! these controllers are moved to productController
 //deleting product
 deleteProduct = async (req, res) => {
   try {
@@ -31,4 +32,4 @@ changeStock = async (req, res) => {
   }
 };
 
-module.exports = { createProduct, deleteProduct, changeStock };
+module.exports = { deleteProduct, changeStock };

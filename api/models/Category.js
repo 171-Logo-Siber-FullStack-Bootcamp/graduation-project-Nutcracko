@@ -1,12 +1,14 @@
 //DB connection
 const pool = require("../config/db");
 
+//Category model and DAL
 class Category {
   constructor(name, products) {
     this.name = name;
     this.products = products;
   }
 
+  //returns all categories
   static getAllCategories = async () => {
     const allCategories = await pool.query("SELECT * FROM category");
     if (allCategories.rowCount == 0) {
@@ -15,6 +17,7 @@ class Category {
     return allCategories.rows;
   };
 
+  //returns category with passed name
   static getCategoryByName = async (categoryname) => {
     const category = await pool.query(
       "SELECT * FROM category WHERE name = $1",
@@ -29,6 +32,8 @@ class Category {
     return category.rows[0];
   };
 
+  //returns all products in a category
+  //! also exists in elasticsearch
   static getAllProductsinCategory = async (categoryname) => {
     const category = await pool.query(
       "SELECT * FROM category WHERE name = $1",
@@ -47,6 +52,7 @@ class Category {
     return products.rows;
   };
 
+  //adds product to category products array
   static addPtoCategoryProducts = async (categoryname, productid) => {
     //finding category from name
     var category = await pool.query("SELECT * FROM category WHERE name = $1", [
@@ -64,6 +70,7 @@ class Category {
     return updatedCategory.rows[0];
   };
 
+  //saves category object to db
   saveCategory = async () => {
     //Creating current date
     var newDate = new Date().toISOString().slice(0, 25).toString();

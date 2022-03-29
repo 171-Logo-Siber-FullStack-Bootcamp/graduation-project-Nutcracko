@@ -30,12 +30,14 @@ export default {
   components: {},
   data() {
     return {
+      //gets auth tokens
       token: localStorage.getItem("auth"),
       sellertoken: localStorage.getItem("sellerauth"),
     };
   },
   methods: {
     logout: function () {
+      //when logout but clicked
       document.cookie = `auth=; Max-Age=-99999999`;
       document.cookie = `sellerauth=; Max-Age=-99999999`;
       localStorage.clear();

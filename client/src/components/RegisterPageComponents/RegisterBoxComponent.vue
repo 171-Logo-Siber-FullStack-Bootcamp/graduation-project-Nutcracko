@@ -48,7 +48,7 @@ export default {
   components: { LogoComponent },
   methods: {
     register: async function () {
-      //check if repeat password matches
+      //check if repeat password not matches password
       if (
         document.getElementById("password").value !=
         document.getElementById("repeatpassword").value
@@ -63,12 +63,13 @@ export default {
           "rgb(255, 232, 232)";
         return;
       }
-      //
+      //gettin data from register form
       const data = {
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
       };
+      //if user account
       if (document.getElementById("acc-dropdown").value == "user") {
         axios({
           method: "POST",
@@ -100,6 +101,7 @@ export default {
               "rgb(255, 232, 232)";
           });
       } else if (document.getElementById("acc-dropdown").value == "seller") {
+        //if seller account
         axios({
           method: "POST",
           url: "http://localhost:5050/api/auth/seller/register",
@@ -130,6 +132,7 @@ export default {
               "rgb(255, 232, 232)";
           });
       } else {
+        //if nothing selected for account type
         document.getElementById(
           "generic-error"
         ).innerHTML = `Please Select Account-Type.`;

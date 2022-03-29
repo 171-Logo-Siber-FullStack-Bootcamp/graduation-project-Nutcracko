@@ -10,6 +10,7 @@ const Category = require("../models/Category");
 //validator
 const { createValidation } = require("../validators/productValidators");
 
+//returns all products
 getAllProducts = async (req, res) => {
   try {
     const allProducts = await Product.getAllProducts();
@@ -39,6 +40,7 @@ getSellerProducts = async (req, res) => {
   }
 };
 
+//returns Product Object by productid
 getProductbyID = async (req, res) => {
   try {
     if (!req.params.productid) {
@@ -56,6 +58,7 @@ getProductbyID = async (req, res) => {
   }
 };
 
+//posts product
 createProduct = async (req, res) => {
   try {
     //if seller did not log in
@@ -99,7 +102,7 @@ createProduct = async (req, res) => {
       seller.username
     );
 
-    //saving product
+    //saving product and creating indexing the product to ES
     const product = await newProduct.saveProduct();
 
     //add product to seller owned_products
@@ -161,6 +164,7 @@ deleteProduct = async (req, res) => {
   }
 };
 
+//updates the given properties of the product and the rest stays the same
 updateProductbyID = async (req, res) => {
   try {
     const product = Product.getProductByID(req.params.productid);

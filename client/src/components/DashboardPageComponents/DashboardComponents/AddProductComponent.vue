@@ -60,6 +60,7 @@ export default {
   },
   mounted() {
     // GET request using fetch with error handling
+    //gets categories for category dropdown
     fetch("http://localhost:5050/api/category")
       .then((response) => response.json())
       .then((data) => (this.categories = data))
@@ -67,7 +68,10 @@ export default {
   },
   methods: {
     addproduct: async function () {
+      //works when create product clicked
+      //creates form-data
       const data = new FormData();
+      //adds info to form-data
       data.append("image", document.getElementById("image").files[0]);
       data.append("name", document.getElementById("productname").value);
       data.append("description", document.getElementById("description").value);
@@ -76,6 +80,7 @@ export default {
         document.getElementById("category-dropdown").value
       );
       data.append("price", document.getElementById("price").value);
+      //posts product form-data to api
       axios({
         method: "post",
         url: "http://localhost:5050/api/product",

@@ -1,6 +1,7 @@
 //DB connection
 const pool = require("../config/db");
 
+//seller model and DAL
 class Seller {
   constructor(username, email, password, ownedproducts) {
     this.username = username;
@@ -9,7 +10,7 @@ class Seller {
     this.owned_products = ownedproducts;
   }
 
-  //get admin by id
+  //get seller by id
   static getSellerByID = async (sellerid) => {
     const seller = await pool.query(
       "SELECT * FROM seller_account WHERE s_id = $1",
@@ -29,7 +30,7 @@ class Seller {
     return sellerObj;
   };
 
-  //get admin by email
+  //get seller by email
   static getSellerByEmail = async (email) => {
     const seller = await pool.query(
       "SELECT * FROM seller_account WHERE email = $1",
@@ -66,6 +67,7 @@ class Seller {
       [username]
     );
 
+    //if empty
     if (seller.rowCount == 0) {
       return false;
     } else if (seller.rowCount >= 1) {
@@ -75,8 +77,9 @@ class Seller {
     }
   };
 
+  //adds product to seller owned_products array
   static addPtoSellerProducts = async (sellerid, productid) => {
-    //finding user by userid
+    //finding seller by sellerid
     var seller = await pool.query(
       "SELECT * FROM seller_account WHERE s_id = $1",
       [sellerid]
@@ -93,12 +96,12 @@ class Seller {
     return updatedSeller.rows[0];
   };
 
-  //create admin account
+  //create seller account
   saveSeller = async () => {
     //Creating current date
     var newDate = new Date().toISOString().slice(0, 25).toString();
 
-    //Inserting new user
+    //Inserting new seller
     const newSeller = await pool.query(
       "INSERT INTO seller_account (username, email, password, owned_products, date) VALUES ($1,$2,$3,$4,$5) RETURNING *",
       [this.username, this.email, this.password, this.owned_products, newDate]

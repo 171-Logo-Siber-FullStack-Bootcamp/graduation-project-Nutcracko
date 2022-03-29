@@ -5,6 +5,7 @@ const elasticController = require("./elasticController");
 //importing logger
 const logger = require("../config/dev-logger");
 
+//handles search route using elasticsearch
 const elasticSearch = async (req, res) => {
   try {
     var term;
@@ -27,6 +28,7 @@ const elasticSearch = async (req, res) => {
   }
 };
 
+//filters by category with elasticsearch
 const elasticFilter = async (req, res) => {
   try {
     if (!req.params.categoryname) {
@@ -38,6 +40,7 @@ const elasticFilter = async (req, res) => {
       req.params.categoryname
     );
 
+    //returning filter
     res.send(filter);
   } catch (error) {
     logger.error(new Error(error), {

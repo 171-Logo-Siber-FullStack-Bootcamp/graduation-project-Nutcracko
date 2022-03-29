@@ -35,7 +35,7 @@ app.use("/static", express.static("public")); //serving static files
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json()); //json parser
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); //parse url encoded data
 
 //Signing Routes
 app.use("/api/auth", authRoute);

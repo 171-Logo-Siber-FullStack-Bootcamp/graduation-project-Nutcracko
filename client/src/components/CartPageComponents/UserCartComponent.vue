@@ -33,6 +33,7 @@ export default {
   components: {},
   mounted() {
     // GET request using fetch with error handling
+    //gets products in the user cart
     axios({
       method: "GET",
       url: "http://localhost:5050/api/user/cart",
@@ -54,6 +55,7 @@ export default {
   },
   methods: {
     calculateTotalValue: function (data) {
+      //calculates the total value of the items in cart
       var totalval = 0;
       for (var i = 0; i < data.length; i++) {
         var val = parseFloat(data[i].numberofitem) * parseFloat(data[i].price);
@@ -62,9 +64,11 @@ export default {
       this.totalvalue = totalval;
     },
     checkout: function () {
+      //checkout function will come here
       alert("Check-out is not possible yet.");
     },
     clearcart: function () {
+      //clears cart of the user
       axios({
         method: "DELETE",
         url: "http://localhost:5050/api/user/cart",

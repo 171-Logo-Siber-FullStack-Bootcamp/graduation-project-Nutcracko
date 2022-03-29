@@ -40,7 +40,7 @@ export default {
   components: {},
   methods: {
     submit: async function () {
-      //if user
+      //if user account
       if (document.getElementById("acctype-dropdown").value == "user") {
         axios({
           method: "POST",
@@ -66,6 +66,7 @@ export default {
       } else if (
         document.getElementById("acctype-dropdown").value == "seller"
       ) {
+        //if seller account
         axios({
           method: "POST",
           url: "http://localhost:5050/api/auth/seller/login",
@@ -88,6 +89,7 @@ export default {
             document.getElementById("form-messages").style["display"] = "block";
           });
       } else {
+        //if account type is not selected
         document.getElementById(
           "generic-error"
         ).innerHTML = `Error: Please Select Account-Type`;

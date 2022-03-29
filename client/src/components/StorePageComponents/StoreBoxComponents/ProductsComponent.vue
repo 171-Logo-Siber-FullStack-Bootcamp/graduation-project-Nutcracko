@@ -26,6 +26,7 @@ export default {
   components: {},
   mounted() {
     // GET request using fetch with error handling
+    //getting all products
     fetch("http://localhost:5050/api/product")
       .then((response) => response.json())
       .then((data) => (this.products = data))
@@ -38,6 +39,7 @@ export default {
   },
   methods: {
     addcomponenttocart: function (productid) {
+      //when add product to cart is clicked
       if (!localStorage.getItem("auth")) {
         window.location.href = "http://localhost:8080/login";
       } else {

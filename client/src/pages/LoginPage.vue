@@ -12,6 +12,7 @@ export default {
   name: "LoginPage",
   components: { TopBarComponent, LoginBoxComponent },
   mounted() {
+    //if seller or user token exists go to homepage
     if (localStorage.getItem("auth") || localStorage.getItem("sellerauth")) {
       window.location.href = "http://localhost:8080/";
     }

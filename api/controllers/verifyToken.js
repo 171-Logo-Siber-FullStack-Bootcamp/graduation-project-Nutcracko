@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+//verifies user token
 userVerify = function (req, res, next) {
   const token = req.cookies.auth || req.headers.auth;
   if (!token) return res.status(401).send("Please Login to proceed further.");
@@ -13,6 +14,7 @@ userVerify = function (req, res, next) {
   }
 };
 
+//verifies seller token
 sellerVerify = function (req, res, next) {
   const token = req.cookies.sellerauth || req.headers.sellerauth;
   if (!token) return res.status(401).send("Please Login to proceed further.");

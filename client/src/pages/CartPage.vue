@@ -12,6 +12,7 @@ export default {
   name: "CartPage",
   components: { TopBarComponent, UserCartComponent },
   mounted() {
+    //if user token does not exists go to login page
     if (!localStorage.getItem("auth")) {
       window.location.href = "http://localhost:8080/login";
     }

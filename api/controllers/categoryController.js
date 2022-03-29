@@ -6,6 +6,7 @@ const logger = require("../config/dev-logger");
 const Category = require("../models/Category");
 const Product = require("../models/Product");
 
+//returns all categories
 getAllCategories = async (req, res) => {
   try {
     const allCategories = await Category.getAllCategories();
@@ -21,6 +22,7 @@ getAllCategories = async (req, res) => {
   }
 };
 
+//! This is also exists by ElasticSearch => in searchController
 //returnes all products in a category
 getAllPinCategory = async (req, res) => {
   try {
@@ -39,6 +41,7 @@ getAllPinCategory = async (req, res) => {
   }
 };
 
+//returns category by name
 getCategoryByName = async (req, res) => {
   try {
     if (!req.params.categoryname) {
@@ -57,6 +60,7 @@ getCategoryByName = async (req, res) => {
   }
 };
 
+//posts category
 createCategory = async (req, res) => {
   try {
     //deny non-JSON requests
@@ -91,6 +95,7 @@ createCategory = async (req, res) => {
   }
 };
 
+//delete category Did not finish it
 deleteCategory = async (req, res) => {
   try {
     const deletedProduct = await Category.deleteCategoryByID(

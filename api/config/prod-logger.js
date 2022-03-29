@@ -1,3 +1,4 @@
+//logger in JSON format
 const { format, createLogger, transports } = require("winston");
 const { timestamp, combine, errors, json } = format;
 

@@ -38,6 +38,7 @@ export default {
   components: {},
   mounted() {
     // GET request using fetch with error handling
+    //gets categories to for the filter category dropdown
     fetch("http://localhost:5050/api/category")
       .then((response) => response.json())
       .then((data) => (this.categories = data))
@@ -50,6 +51,7 @@ export default {
   },
   methods: {
     search: function () {
+      //search button clicked function
       if (document.getElementById("search-bar").value != "") {
         window.location.replace(
           "http://localhost:8080/search?term=" +
@@ -60,6 +62,7 @@ export default {
       }
     },
     filter: function () {
+      //filter button clicked function
       if (document.getElementById("filter-dropdown").value != "select") {
         window.location.replace(
           "http://localhost:8080/filter?category=" +

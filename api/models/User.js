@@ -4,6 +4,7 @@ const pool = require("../config/db");
 //product model
 const Product = require("../models/Product");
 
+//user model and DAL
 class User {
   constructor(username, email, password, cart, noi_incart) {
     this.username = username;
@@ -201,8 +202,8 @@ class User {
 
   //verifies user
   verifyUser = async (userid) => {
-    //updating admin
-    const updatedAdmin = await pool.query(
+    //updating user
+    const updatedUser = await pool.query(
       "UPDATE user_account SET verified=$1 WHERE u_id=$2",
       [true, userid]
     );

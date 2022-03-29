@@ -32,11 +32,12 @@ export default {
   name: "SearchProductsComponent",
   components: {},
   mounted() {
-    //gettin query params
+    //getting query params
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
     // GET request using fetch with error handling
+    //to get searched products
     fetch("http://localhost:5050/api/search?term=" + params.term)
       .then((response) => response.json())
       .then((data) => {
@@ -51,6 +52,7 @@ export default {
   },
   methods: {
     addcomponenttocart: function (productid) {
+      //when add to cart button on any product clicked
       if (!localStorage.getItem("auth")) {
         window.location.href = "http://localhost:8080/login";
       } else {

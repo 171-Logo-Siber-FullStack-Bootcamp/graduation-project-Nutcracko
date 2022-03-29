@@ -4,6 +4,7 @@ const logger = require("../config/dev-logger");
 //User model
 const User = require("../models/User");
 
+//returns user cart
 getUserCart = async (req, res) => {
   try {
     //finding user from userid taken from token
@@ -19,6 +20,7 @@ getUserCart = async (req, res) => {
   }
 };
 
+//adds the product with productid:req.params.productid to user cart
 addProducttoCart = async (req, res) => {
   try {
     //userid taken from token and productid delivered by request body
@@ -55,6 +57,7 @@ clearUserCart = async (req, res) => {
   }
 };
 
+//returns user profile information
 userProfile = (req, res) => {
   try {
     //getting userid from request

@@ -26,6 +26,7 @@ export default {
   },
   mounted() {
     // GET request using fetch with error handling
+    //gets products of the seller
     axios({
       method: "GET",
       url: "http://localhost:5050/api/product/seller",
@@ -39,6 +40,7 @@ export default {
   },
   methods: {
     changeStock: async function (productid) {
+      //works when change stock button of any of the products is clicked
       axios({
         method: "PUT",
         url: "http://localhost:5050/api/product/changestock/" + productid,
