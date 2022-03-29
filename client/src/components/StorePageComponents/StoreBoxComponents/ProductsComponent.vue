@@ -65,7 +65,7 @@ export default {
 }
 .product {
   width: 220px;
-  height: 300px;
+  height: 370px;
   border: 2px solid var(--primary);
   padding: 10px;
   border-radius: 15px;

@@ -43,7 +43,7 @@ export default {
   text-align: center;
 }
 .hero-container img {
-  width: 50%;
+  width: 25%;
   height: auto;
   margin-top: 5%;
   margin-bottom: 3%;

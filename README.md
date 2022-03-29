@@ -10,13 +10,9 @@ Express, ElasticSearch, pg, jsonwebtoken, multer, winston, bcrypt, cookie-parser
 
 ## DB Schema:
 
----
-
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
+![alt text](./screenshots/DB-schema.JPG "DB Schema")
 
 ## BACKEND Folder Structure(./api/)
-
----
 
 -config: configuration scripts for the application such as elasticsearch and db connection configurations and logger configs
 
@@ -35,8 +31,6 @@ controllers since mail account is needed.
 
 ## FRONTEND Folder Structure(./client/)
 
----
-
 inside src folder
 
 -assets: Holds the assets for the frontend. Only logo exists by the time.
@@ -49,7 +43,7 @@ inside src folder
 
 ## How to run the app;
 
----
+.env file should be checked and changed for configuration.
 
 Api:
 
@@ -71,13 +65,56 @@ npm run serve
 
 ---
 
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
-![alt text](./screenshots/DB-schema.jpg "DB Schema")
+## HomePage:
+
+![alt text](./screenshots/HomePage.JPG "Home page")
+
+## ContactPage:
+
+![alt text](./screenshots/ContactPage.JPG "Contact page")
+
+## StorePage:
+
+![alt text](./screenshots/StorePage.JPG "Store page")
+
+## LoginPage:
+
+![alt text](./screenshots/LoginPage.JPG "Login Page")
+
+## RegisterPage:
+
+![alt text](./screenshots/RegisterPage.JPG "Register Page")
+
+![alt text](./screenshots/RegisterPage2.JPG "Register Page 2")
+
+## StorePage After Login:
+
+![alt text](./screenshots/UserItemAddedtoCart.JPG "User item added to cart")
+
+## User Cart Page
+
+![alt text](./screenshots/UserCart.JPG "User cart page")
+
+## Seller Dashboard:
+
+![alt text](./screenshots/SellerDashboard.JPG "Seller Dashboard")
+
+## Item Stock Option Changed:
+
+![alt text](./screenshots/StockChanged.JPG "Stock changed")
+
+## Item's Out of Stock on store:
+
+![alt text](./screenshots/ItemsOutofStockInStore.JPG "Stock changed => store")
+
+## Search:
+
+![alt text](./screenshots/Search.JPG "Search")
+
+---
+
+![alt text](./screenshots/Search2.JPG "Search2")
+
+## Filter Shoes Category:
+
+![alt text](./screenshots/StockChanged.JPG "Stock changed")
