@@ -117,4 +117,4 @@ npm run serve
 
 ## Filter Shoes Category:
 
-![alt text](./screenshots/StockChanged.JPG "Stock changed")
+![alt text](./screenshots/FilterShoes.JPG "Filter Shoes Category")
